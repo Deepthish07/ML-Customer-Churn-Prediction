@@ -1,0 +1,68 @@
+# Project Configuration
+
+# ============ DATA CONFIGURATION ============
+data:
+  raw_path: "data/raw/WA_Fn-UseC_-Telco-Customer-Churn.csv"
+  processed_path: "data/processed/churn_processed.csv"
+  test_size: 0.2
+  random_state: 42
+
+# ============ FEATURES ============
+features:
+  numerical_features:
+    - tenure
+    - MonthlyCharges
+    - TotalCharges
+  
+  categorical_features:
+    - gender
+    - SeniorCitizen
+    - Partner
+    - Dependents
+    - PhoneService
+    - MultipleLines
+    - InternetService
+    - OnlineSecurity
+    - OnlineBackup
+    - DeviceProtection
+    - TechSupport
+    - StreamingTV
+    - StreamingMovies
+    - Contract
+    - PaperlessBilling
+    - PaymentMethod
+  
+  target: Churn
+
+# ============ MODEL PARAMETERS ============
+models:
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+  
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 5
+    min_samples_leaf: 2
+    random_state: 42
+  
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+# ============ TUNING PARAMETERS ============
+tuning:
+  cv_folds: 5
+  scoring: "roc_auc"
+  n_trials: 50
+
+# ============ PATHS ============
+paths:
+  models_dir: "models/trained_models/"
+  results_dir: "results/"
+  logs_dir: "logs/"
